@@ -2,11 +2,18 @@ package tn.iit.teacher_authorization_management;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "admins")
 public class Admin {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
 	private String username;
 	private String password;
@@ -17,9 +24,18 @@ public class Admin {
 	public Admin() {
 	}
 
-	public Admin(String username, String password) {
+	public Admin(Long id, String username, String password) {
+		this.id = id;
 		this.username = username;
 		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
