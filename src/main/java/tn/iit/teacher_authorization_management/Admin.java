@@ -1,5 +1,6 @@
 package tn.iit.teacher_authorization_management;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,6 +10,9 @@ public class Admin {
 
 	private String username;
 	private String password;
+	
+	@Column(name = "remember_token")
+	private String rememberToken;
 
 	public Admin() {
 	}

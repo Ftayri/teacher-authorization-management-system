@@ -25,15 +25,19 @@ public class Professor {
 
 	private String email;
 
+	@Column(name = "authorized", columnDefinition = "TINYINT(1)")
+	private boolean authorized; 
+
 	public Professor() {
 	}
 
-	public Professor(Long id, String firstName, String lastName, String cin, String email) {
+	public Professor(Long id, String firstName, String lastName, String cin, String email, boolean authorized) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.cin = cin;
 		this.email = email;
+		this.authorized = authorized;
 	}
 
 	public Long getId() {
@@ -76,4 +80,11 @@ public class Professor {
 		this.email = email;
 	}
 
+	public boolean isAuthorized() {
+		return authorized;
+	}
+
+	public void setAuthorized(boolean authorized) {
+		this.authorized = authorized;
+	}
 }
