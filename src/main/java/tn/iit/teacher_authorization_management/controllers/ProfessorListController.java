@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tn.iit.teacher_authorization_management.Professor;
 import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
+import tn.iit.teacher_authorization_management.util.HibernateUtil;
 
 /**
  * Servlet implementation class ProfessorListController
@@ -18,21 +19,27 @@ import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
 @WebServlet("/ProfessorListController")
 public class ProfessorListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ProfessorListController() {
-        super();
-    }
+	private ProfessorDAO professorDAO;
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Professor> professors = ProfessorDAO.getAllProfessors();
-		request.setAttribute("professors", professors);
-        request.getRequestDispatcher("view/table.jsp").forward(request, response);
+	public ProfessorListController() {
+		super();
+	}
+	
+	public void init() {
+		 professorDAO = new ProfessorDAO(HibernateUtil.getSessionFactory());
 
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Professor> professors = professorDAO.getAllProfessors();
+		request.setAttribute("professors", professors);
+		request.getRequestDispatcher("table.jsp").forward(request, response);
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
