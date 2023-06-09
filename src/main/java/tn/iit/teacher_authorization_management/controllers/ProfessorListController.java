@@ -24,9 +24,9 @@ public class ProfessorListController extends HttpServlet {
 	public ProfessorListController() {
 		super();
 	}
-	
+
 	public void init() {
-		 professorDAO = new ProfessorDAO(HibernateUtil.getSessionFactory());
+		professorDAO = new ProfessorDAO(HibernateUtil.getSessionFactory());
 
 	}
 
