@@ -75,20 +75,28 @@ public class ProfessorDAO {
 		}
 	}
 
-	public void deleteProfessor(Professor professor) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			session.delete(professor);
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+	public void deleteProfessor(int professorId) {
+	    Session session = sessionFactory.openSession();
+	    Transaction transaction = null;
+	    try {
+	        transaction = session.beginTransaction();
+	        
+	        // Retrieve the professor object by ID
+	        Professor professor = session.get(Professor.class, professorId);
+	        
+	        // Delete the professor if found
+	        if (professor != null) {
+	            session.delete(professor);
+	            transaction.commit();
+	        }
+	    } catch (Exception e) {
+	        if (transaction != null) {
+	            transaction.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
 	}
+
 }

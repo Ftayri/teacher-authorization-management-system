@@ -498,13 +498,19 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Are You Sure?</h5>
-						<span id="closeModalDelete" class="close">&times;</span>
+						<button type="button" class="close" data-dismiss="modal" id="closeModalDelete"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 					<div class="modal-body">
 						<p>Are you sure you want to delete?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger">Yes</button>
+						<form action="DeleteProfessor" method="POST">
+							<input id="professorId" value="">
+							<button type="submit" class="btn btn-danger">Yes</button>
+						</form>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 					</div>
 				</div>
@@ -556,19 +562,25 @@
 					button.addEventListener("click", function () {
 						// Get the professor's ID from the data attribute
 						var professorId = button.dataset.professorId;
-
+						console.log(professorId);
 						// Open the delete modal using the professor's ID
 						var deleteModal = document.querySelector("#myModalDelete");
 						deleteModal.style.display = "block"; // Show the modal
 
-						// Perform additional actions based on the professor's ID if needed
+						// Perform additional actions based on the professor's ID if neededvalue with
+						var yesButton = document.querySelector("#myModalDelete  .btn-danger");
+						console.log(yesButton);
+
+						var closeModalDelete = document.querySelector("#closeModalDelete");
+						closeModalDelete.addEventListener("click", function () {
+							deleteModal.style.display = "none";
+						});
 					});
 				});
+
 			});
 
 		</script>
-
-
 
 
 
@@ -586,58 +598,6 @@
 		<!-- Page level plugins -->
 		<script src="<c:url value='/vendor/datatables/jquery.dataTables.min.js'/>"></script>
 		<script src="<c:url value='/vendor/datatables/dataTables.bootstrap4.min.js'/>"></script>
-
-
-
-		<!-- 	<script>
-		// Get the modal element
-		var modal = document.getElementById("myModal");
-
-		// Get the button elements
-		var button = document.getElementById("editButton");
-
-		// Get the close button element
-		var closeModal = document.getElementById("closeModal");
-
-		// Loop through all the buttons and add click event listeners
-
-		button.addEventListener("click", function() {
-
-			// Get the row data from the clicked button's parent row
-			var row = this.parentNode.parentNode;
-			var rowData = {
-				name : row.cells[0].textContent,
-				lastName : row.cells[1].textContent,
-				cin : row.cells[2].textContent,
-				email : row.cells[3].textContent,
-			};
-
-			// Populate the modal fields with the row data
-			document.getElementById("name").value = rowData.name;
-			document.getElementById("lastName").value = rowData.lastName;
-			document.getElementById("cin").value = rowData.cin;
-			document.getElementById("email").value = rowData.email;
-
-			// Display the modal
-			modal.style.display = "block";
-		});
-
-		// Close the modal when the close button is clicked
-		closeModal.addEventListener("click", function() {
-			modal.style.display = "none";
-		});
-	</script>
-	<script>
-		var modalDelete = document.getElementById("myModalDelete");
-		var buttondDelete = document.getElementById("deleteButton");
-		var closeModalDelete = document.getElementById("closeModalDelete");
-		buttondDelete.addEventListener("click", function() {
-			modalDelete.style.display = "block";
-		});
-		closeModalDelete.addEventListener("click", function() {
-			modalDelete.style.display = "none";
-		});
-	</script> -->
 
 
 
