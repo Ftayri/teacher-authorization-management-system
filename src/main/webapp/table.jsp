@@ -508,7 +508,7 @@
 					</div>
 					<div class="modal-footer">
 						<form action="DeleteProfessor" method="POST">
-							<input id="professorId" value="">
+							<input type="text" name="id" id="professorIdInput" value="3">
 							<button type="submit" class="btn btn-danger">Yes</button>
 						</form>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -568,8 +568,8 @@
 						deleteModal.style.display = "block"; // Show the modal
 
 						// Perform additional actions based on the professor's ID if neededvalue with
-						var yesButton = document.querySelector("#myModalDelete  .btn-danger");
-						console.log(yesButton);
+						var Inputform = document.querySelector("#professorIdInput");
+						Inputform.value = professorId;
 
 						var closeModalDelete = document.querySelector("#closeModalDelete");
 						closeModalDelete.addEventListener("click", function () {

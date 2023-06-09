@@ -75,7 +75,7 @@ public class ProfessorDAO {
 		}
 	}
 
-	public void deleteProfessor(int professorId) {
+	public void deleteProfessor(Long professorId) {
 	    Session session = sessionFactory.openSession();
 	    Transaction transaction = null;
 	    try {
