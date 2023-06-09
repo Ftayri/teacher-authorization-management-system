@@ -40,7 +40,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Log In</h1>
                                     </div>
-                                    <form class="user" method="post" action="LoginController">
+                                    <form class="user" method="post" action="<c:url value='/LoginController'/>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 name="username" aria-describedby="usernameHelp"
