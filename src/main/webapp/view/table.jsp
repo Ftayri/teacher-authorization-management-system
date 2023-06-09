@@ -12,7 +12,8 @@
     <title>SB Admin 2 - Tables</title>
 
     <!-- Custom fonts for this template -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" rel="stylesheet"
+        type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -375,6 +376,7 @@
                                             <th>Last Name</th>
                                             <th>CIN</th>
                                             <th>Email</th>
+                                            <th>Work Authorization</th>
                                             <th>Actions</th>
 
                                         </tr>
@@ -385,6 +387,7 @@
                                             <th>Last Name</th>
                                             <th>CIN</th>
                                             <th>Email</th>
+                                            <th>Work Authorization</th>
                                             <th>Actions</th>
 
                                         </tr>
@@ -395,6 +398,7 @@
                                             <td>Integration Specialist</td>
                                             <td>11112123</td>
                                             <td>email.email@gmail.com</td>
+                                            <td>Yes</td>
                                             <td>
 
                                                 <button class=" btn btn-circle btn-warning " id="editButton">
@@ -486,6 +490,8 @@
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="Enter Email">
                         </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
