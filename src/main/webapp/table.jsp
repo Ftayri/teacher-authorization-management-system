@@ -460,23 +460,24 @@
 
 					</div>
 
-					<form>
+					<form action="UpdateProfessor" method="POST">
 						<div class="modal-body">
+							<input id="idEdit" type="hidden" name="id">
 							<div class="form-group">
-								<label for="name">First Name</label> <input type="text" class="form-control" id="name"
-									placeholder="Enter name">
+								<label for="name">First Name</label> <input type="text" class="form-control"
+									name="firstName" id="name" placeholder="Enter name">
 							</div>
 							<div class="form-group">
-								<label for="lastName">Last Name</label> <input type="text" class="form-control"
-									id="lastName" placeholder="Enter Last Name">
+								<label for="lastName">Last Name</label> <input type="text" name="lastName"
+									class="form-control" id="lastName" placeholder="Enter Last Name">
 							</div>
 							<div class="form-group">
-								<label for="cin">CIN</label> <input type="number" class="form-control" id="cin"
-									placeholder="Enter CIN">
+								<label for="cin">CIN</label> <input type="number" name="cin" class="form-control"
+									id="cin" placeholder="Enter CIN">
 							</div>
 							<div class="form-group">
-								<label for="email">Email</label> <input type="email" class="form-control" id="email"
-									placeholder="Enter Email">
+								<label for="email">Email</label> <input type="email" name="email" class="form-control"
+									id="email" placeholder="Enter Email">
 							</div>
 
 
@@ -508,7 +509,7 @@
 					</div>
 					<div class="modal-footer">
 						<form action="DeleteProfessor" method="POST">
-							<input type="text" name="id" id="professorIdInput" value="3">
+							<input type="hidden" name="id" id="professorIdInput">
 							<button type="submit" class="btn btn-danger">Yes</button>
 						</form>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -533,6 +534,7 @@
 
 						// Retrieve the professor's data from the table row
 						var tds = tableRow.querySelectorAll("td");
+
 						var professorFirstName = tds[0].innerText;
 						var professorLastName = tds[1].innerText;
 						var professorCin = tds[2].innerText;
@@ -544,6 +546,7 @@
 						editModal.querySelector("#lastName").value = professorLastName;
 						editModal.querySelector("#cin").value = professorCin;
 						editModal.querySelector("#email").value = professorEmail;
+						editModal.querySelector("#idEdit").value = professorId;
 
 						editModal.style.display = "block";
 
