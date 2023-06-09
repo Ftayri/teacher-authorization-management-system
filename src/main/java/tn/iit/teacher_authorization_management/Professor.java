@@ -25,6 +25,9 @@ public class Professor {
 
 	private String email;
 
+	public Professor() {
+	}
+
 	public Professor(Long id, String firstName, String lastName, String cin, String email) {
 		this.id = id;
 		this.firstName = firstName;
@@ -37,7 +40,7 @@ public class Professor {
 		return id;
 	}
 
-	public void setId(Long id) {
+	private void setId(Long id) {
 		this.id = id;
 	}
 
