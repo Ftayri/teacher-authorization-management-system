@@ -49,4 +49,13 @@ public class AdminDAO {
 			transaction.commit();
 		}
 	}
+
+	public Admin getAdminByRememberToken(String value) {
+		try (Session session = sessionFactory.openSession()) {
+			Query<Admin> query = session.createQuery("FROM Admin WHERE remember_token = :remember_token",
+					Admin.class);
+			query.setParameter("remember_token", value);
+			return query.uniqueResult();
+		}
+	}
 }

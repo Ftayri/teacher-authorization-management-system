@@ -46,6 +46,14 @@ public class Admin {
 		this.username = username;
 	}
 
+	public String getRememberToken() {
+		return rememberToken;
+	}
+
+	public void setRememberToken(String rememberToken) {
+		this.rememberToken = rememberToken;
+	}
+
 	public String getPassword() {
 		return password;
 	}

@@ -1,9 +1,12 @@
 package tn.iit.teacher_authorization_management.controller;
 
 import java.io.IOException;
+import java.util.UUID;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +18,7 @@ import tn.iit.teacher_authorization_management.util.HibernateUtil;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/LoginController")
+@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"}, loadOnStartup = 1)
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AdminDAO adminDAO;
@@ -37,7 +40,21 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals("remember_token")) {
+						Admin admin = adminDAO.getAdminByRememberToken(cookie.getValue());
+						if (admin != null) {
+							request.getSession().setAttribute("admin", admin);
+							response.sendRedirect("table.jsp");
+							return;
+						}
+					}
+				}
+			}
+			response.sendRedirect("login.jsp");
 	}
 
 	/**
@@ -49,18 +66,34 @@ public class LoginController extends HttpServlet {
 		// get the username and password from the request
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String remember = request.getParameter("rememberToken");
 		// get the admin from the database
 		Admin admin = adminDAO.getAdminByUsernameAndPassword(username, password);
 		if (admin != null) {
 			// if the admin exists, set the session attribute to the admin
 			request.getSession().setAttribute("admin", admin);
+			String token = null;
+			// if the remember me is checked, set the cookie
+			if (remember != null) {
+				token = UUID.randomUUID().toString();
+				Cookie cookie = new Cookie("remember_token", token);
+				cookie.setMaxAge(60 * 60 * 24 * 30);
+				response.addCookie(cookie);
+			}else {
+				Cookie cookie = new Cookie("remember_token", "");
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
+			admin.setRememberToken(token);
+			adminDAO.saveOrUpdateAdmin(admin);
 			// redirect to the home page
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("table.jsp");
 		} else {
 			// set the error message
 			request.setAttribute("error", "Invalid username or password");
 			// redirect to the login page
-			response.sendRedirect("login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
