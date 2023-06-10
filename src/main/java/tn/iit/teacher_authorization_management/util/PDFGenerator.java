@@ -1,10 +1,10 @@
 package tn.iit.teacher_authorization_management.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 
-import javax.servlet.ServletContext;
-
+import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -24,13 +24,15 @@ public class PDFGenerator {
 			document.addPage(page);
 
 			PDPageContentStream contentStream = new PDPageContentStream(document, page);
-			PDImageXObject logoImage = PDImageXObject.createFromFile("F:\\Cours\\2eme\\JEE\\Teacher Authorization Management System\\src\\main\\resources\\logo.png", document);
+			InputStream imageStream = PDFGenerator.class.getClassLoader().getResourceAsStream("logo.png");
+			PDImageXObject logoImage = PDImageXObject.createFromByteArray(document, IOUtils.toByteArray(imageStream),
+					"logo");
 
 			contentStream.drawImage(logoImage, 25, 775, 50, 50);
 
 			contentStream.setFont(PDType1Font.TIMES_BOLD, 25);
 			contentStream.beginText();
-			contentStream.newLineAtOffset(200,800);
+			contentStream.newLineAtOffset(200, 800);
 			contentStream.showText("Work Authorization");
 			contentStream.endText();
 
@@ -40,23 +42,23 @@ public class PDFGenerator {
 			contentStream.newLineAtOffset(50, 650);
 
 			String introText = "I, " + admin.getUsername() + ", the undersigned hereby acknowledge that Professor "
-			        + professor.getFirstName() + " " + professor.getLastName() + " of ID " + professor.getCin()
-			        + " is allowed " + weeksLeft * 4 + " working hours  for expertise activities and/or"
-			        		+ " training in continuing vocational education and training.";
+					+ professor.getFirstName() + " " + professor.getLastName() + " of ID " + professor.getCin()
+					+ " is allowed " + weeksLeft * 4 + " working hours  for expertise activities and/or"
+					+ " training in continuing vocational education and training.";
 			float maxWidth = 500;
 
 			String[] words = introText.split("\\s+");
 			StringBuilder line = new StringBuilder();
 			for (String word : words) {
-			    float width = PDType1Font.TIMES_ROMAN.getStringWidth(line.toString() + " " + word) / 1000 * 12;
-			    System.out.println(width);
-			    if (width > maxWidth) {
-			        contentStream.showText(line.toString().trim()); 
-			        contentStream.newLine();
-			        line = new StringBuilder(word + " ");
-			    } else {
-			        line.append(word).append(" ");
-			    }
+				float width = PDType1Font.TIMES_ROMAN.getStringWidth(line.toString() + " " + word) / 1000 * 12;
+				System.out.println(width);
+				if (width > maxWidth) {
+					contentStream.showText(line.toString().trim());
+					contentStream.newLine();
+					line = new StringBuilder(word + " ");
+				} else {
+					line.append(word).append(" ");
+				}
 			}
 			contentStream.showText(line.toString().trim());
 			contentStream.setLeading(25f);
@@ -68,7 +70,9 @@ public class PDFGenerator {
 			contentStream.endText();
 			contentStream.close();
 
-			document.save("F:\\Cours\\2eme\\JEE\\Teacher Authorization Management System\\src\\main\\resources\\authorization"+professor.getFirstName()+"_"+professor.getLastName()+".pdf");
+			document.save(
+					"F:\\Cours\\2eme\\JEE\\Teacher Authorization Management System\\src\\main\\resources\\documents\\authorization_"
+							+ professor.getFirstName() + "_" + professor.getLastName() + ".pdf");
 			document.close();
 
 			System.out.println("PDF generated successfully.");
