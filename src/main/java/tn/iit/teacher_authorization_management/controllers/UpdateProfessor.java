@@ -51,14 +51,21 @@ public class UpdateProfessor extends HttpServlet {
 		String email = request.getParameter("email");
 		String cin = request.getParameter("cin");
 		Professor professor = professorDAO.getProfessorById(id);
-		professor.setFirstName(firstName);
-		professor.setLastName(lastName);
-		professor.setEmail(email);
-		professor.setCin(cin);
-		professorDAO.updateProfessor(professor);
-		request.getRequestDispatcher("ProfessorListController").forward(request, response);
+		if(professorDAO.verifyProfessor(cin)==false) {	
+			professor.setFirstName(firstName);
+			professor.setLastName(lastName);
+			professor.setEmail(email);
+			professor.setCin(cin);
+			professorDAO.updateProfessor(professor);
+			request.setAttribute("error","Professor Updated Successfully !");
+			request.getRequestDispatcher("ProfessorListController").forward(request, response);
 
+		}
+		else {
+			request.setAttribute("error", "CIN already Exists");
+			request.getRequestDispatcher("ProfessorListController").forward(request, response);
 
+		}
 	}
 
 }

@@ -288,6 +288,23 @@
 										</button>
 									</div>
 								</c:when>
+								<c:when test="${requestScope.error eq 'CIN already Exists'}">
+									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+										<strong>${requestScope.error}</strong>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								</c:when>
+
+								<c:when test="${requestScope.error eq 'Professor Updated Successfully !'}">
+									<div class="alert alert-success alert-dismissible fade show" role="alert">
+										<strong>${requestScope.error}</strong>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								</c:when>
 							</c:choose>
 						</c:if>
 
