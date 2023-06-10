@@ -10,5 +10,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <mapping class="tn.iit.teacher_authorization_management.Admin"/>
+        <mapping class="tn.iit.teacher_authorization_management.Professor"/>
+        
     </session-factory>
 </hibernate-configuration>
