@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Tables</title>
+<title>Generate Document</title>
 
 <!-- Custom fonts for this template -->
 <link
@@ -21,17 +22,7 @@
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="../css/sb-admin-2.min.css" rel="stylesheet">
-
-<!-- Custom styles for this page -->
-<link
-	href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
-	
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
-	
-
+<link href="<c:url value='/css/sb-admin-2.min.css'/>" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -109,12 +100,12 @@
 			<div class="sidebar-heading">Addons</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
+			<li class="nav-item active"><a class="nav-link" href="#"
 				data-toggle="collapse" data-target="#collapsePages"
 				aria-expanded="true" aria-controls="collapsePages"> <i
 					class="fas fa-fw fa-folder"></i> <span>Pages</span>
 			</a>
-				<div id="collapsePages" class="collapse"
+				<div id="collapsePages" class="collapse show"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Login Screens:</h6>
@@ -125,7 +116,7 @@
 						<div class="collapse-divider"></div>
 						<h6 class="collapse-header">Other Pages:</h6>
 						<a class="collapse-item" href="404.html">404 Page</a> <a
-							class="collapse-item" href="blank.html">Blank Page</a>
+							class="collapse-item active" href="blank.html">Blank Page</a>
 					</div>
 				</div></li>
 
@@ -135,9 +126,9 @@
 			</a></li>
 
 			<!-- Nav Item - Tables -->
-			<li class="nav-item active"><a class="nav-link"
-				href="tables.html"> <i class="fas fa-fw fa-table"></i> <span>Tables</span></a>
-			</li>
+			<li class="nav-item"><a class="nav-link" href="tables.html">
+					<i class="fas fa-fw fa-table"></i> <span>Tables</span>
+			</a></li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -161,12 +152,10 @@
 					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
 					<!-- Sidebar Toggle (Topbar) -->
-					<form class="form-inline">
-						<button id="sidebarToggleTop"
-							class="btn btn-link d-md-none rounded-circle mr-3">
-							<i class="fa fa-bars"></i>
-						</button>
-					</form>
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
 
 					<!-- Topbar Search -->
 					<form
@@ -357,70 +346,67 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
-					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Professors List</h1>
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Professors
-								Data</h6>
+					<c:if test="${not empty requestScope.pdfSuccess}">
+						<div class="alert alert-success alert-dismissible fade show"
+							role="alert">
+							<strong>${requestScope.pdfSuccess}</strong>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>First Name</th>
-											<th>Last Name</th>
-											<th>CIN</th>
-											<th>Email</th>
-											<th>Work Authorization</th>
-											<th>Actions</th>
-
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>First Name</th>
-											<th>Last Name</th>
-											<th>CIN</th>
-											<th>Email</th>
-											<th>Work Authorization</th>
-											<th>Actions</th>
-
-										</tr>
-									</tfoot>
-									<tbody>
-										<c:forEach var="professor" items="${requestScope.professors}">
-											<tr>
-												<td>${professor.id}</td>
-												<td>${professor.firstName}</td>
-												<td>${professor.lastName}</td>
-												<td>${professor.cin}</td>
-												<td>${professor.email}</td>
-												<td>${professor.authorized}</td>
-												<td>
-
-													<button class=" btn btn-circle btn-warning "
-														id="editButton">
-														<i class="fas fa-edit"></i>
-													</button>
-													<button class=" btn btn-circle btn-danger "
-														id="deleteButton">
-														<i class="fas fa-trash"></i>
-													</button>
-
-
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+					</c:if>
+					<form action="DocumentController" method="POST">
+						<div class="form-group">
+							<label for="selectProfessor">Select a professor to
+								generate document</label> <select class="form-control"
+								id="selectProfessor" name="id" required>
+								<option value="0">Select Professor</option>
+								<c:forEach items="${requestScope.professors}" var="professor">
+									<option value="${professor.id}">${professor.firstName}
+										${professor.lastName}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="firstName">First Name</label> <input type="text"
+										class="form-control" id="firstName" placeholder="First Name"
+										disabled>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="lastName">Last Name</label> <input type="text"
+										class="form-control" id="lastName" placeholder="Last Name"
+										disabled>
+								</div>
 							</div>
 						</div>
-					</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="cin">CIN</label> <input type="text"
+										class="form-control" id="cin" placeholder="CIN" disabled>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="email">Email address</label> <input type="email"
+										class="form-control" id="email" placeholder="Email" disabled>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<button type="submit"
+									class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+									<i class="fas fa-download fa-sm text-white-50"></i> Generate
+									Authorization
+								</button>
+							</div>
+						</div>
+
+					</form>
 
 				</div>
 				<!-- /.container-fluid -->
@@ -472,142 +458,52 @@
 		</div>
 	</div>
 
-
-	<!-- Modal EDIT-->
-	<div id="myModal" class="modal">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<span id="closeModal" class="close">&times;</span>
-				</div>
-				<form>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="name">First Name</label> <input type="text"
-								class="form-control" id="name" placeholder="Enter name">
-						</div>
-						<div class="form-group">
-							<label for="lastName">Last Name</label> <input type="text"
-								class="form-control" id="lastName" placeholder="Enter Last Name">
-						</div>
-						<div class="form-group">
-							<label for="cin">CIN</label> <input type="number"
-								class="form-control" id="cin" placeholder="Enter CIN">
-						</div>
-						<div class="form-group">
-							<label for="email">Email</label> <input type="email"
-								class="form-control" id="email" placeholder="Enter Email">
-						</div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<!-- Modal DELETE-->
-	<div id="myModalDelete" class="modal">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Are You Sure?</h5>
-					<span id="closeModalDelete" class="close">&times;</span>
-				</div>
-				<div class="modal-body">
-					<p>Are you sure you want to delete?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger">Yes</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">No</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
 	<!-- Bootstrap core JavaScript-->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<c:url value='/vendor/jquery/jquery.min.js'/>"></script>
+	<script
+		src="<c:url value='/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 
 	<!-- Core plugin JavaScript-->
-	<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script
+		src="<c:url value='/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
 
 	<!-- Custom scripts for all pages-->
 	<script src="js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	<script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-	<script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-
-
-	<script>
-		// Get the modal element
-		var modal = document.getElementById("myModal");
-
-		// Get the button elements
-		var button = document.getElementById("editButton");
-
-		// Get the close button element
-		var closeModal = document.getElementById("closeModal");
-
-		// Loop through all the buttons and add click event listeners
-
-		button.addEventListener("click", function() {
-
-			// Get the row data from the clicked button's parent row
-			var row = this.parentNode.parentNode;
-			var rowData = {
-				name : row.cells[0].textContent,
-				lastName : row.cells[1].textContent,
-				cin : row.cells[2].textContent,
-				email : row.cells[3].textContent,
-			};
-
-			// Populate the modal fields with the row data
-			document.getElementById("name").value = rowData.name;
-			document.getElementById("lastName").value = rowData.lastName;
-			document.getElementById("cin").value = rowData.cin;
-			document.getElementById("email").value = rowData.email;
-
-			// Display the modal
-			modal.style.display = "block";
-		});
-
-		// Close the modal when the close button is clicked
-		closeModal.addEventListener("click", function() {
-			modal.style.display = "none";
-		});
-	</script>
-	<script>
-		var modalDelete = document.getElementById("myModalDelete");
-		var buttondDelete = document.getElementById("deleteButton");
-		var closeModalDelete = document.getElementById("closeModalDelete");
-		buttondDelete.addEventListener("click", function() {
-			modalDelete.style.display = "block";
-		});
-		closeModalDelete.addEventListener("click", function() {
-			modalDelete.style.display = "none";
-		});
-	</script>
+	<script
+		src="<c:url value='/vendor/datatables/jquery.dataTables.min.js'/>"></script>
+	<script
+		src="<c:url value='/vendor/datatables/dataTables.bootstrap4.min.js'/>"></script>
 	<script>
 		$(document).ready(function() {
-			$('#dataTable').DataTable();
+			$('#selectProfessor').change(function() {
+				var selectedProfessor = $(this).val();
+				$.ajax({
+					url : 'ProfessorController',
+					type : 'POST',
+					data : {
+						'professorId' : selectedProfessor
+					},
+					dataType : 'json'
+				}).done(function(data) {
+
+					if (data.status) {
+						$('#firstName').val('');
+						$('#lastName').val('');
+						$('#cin').val('');
+						$('#email').val('');
+						return;
+					} else {
+						$('#firstName').val(data.firstName);
+						$('#lastName').val(data.lastName);
+						$('#cin').val(data.cin);
+						$('#email').val(data.email);
+					}
+				});
+			});
 		});
 	</script>
-
 
 </body>
 
