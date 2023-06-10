@@ -1,4 +1,4 @@
-package tn.iit.teacher_authorization_management.controller;
+package tn.iit.teacher_authorization_management.controllers;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -87,7 +87,7 @@ public class LoginController extends HttpServlet {
 			admin.setRememberToken(token);
 			adminDAO.saveOrUpdateAdmin(admin);
 			// redirect to the home page
-			response.sendRedirect("table.jsp");
+			response.sendRedirect("ProfessorListController");
 		} else {
 			// set the error message
 			request.setAttribute("error", "Invalid username or password");
