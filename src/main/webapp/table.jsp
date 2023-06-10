@@ -75,7 +75,7 @@
 
 
 				<!-- Nav Item - Tables -->
-				<li class="nav-item"><a class="nav-link" href="index.html">
+				<li class="nav-item"><a class="nav-link" href="DocumentController">
 						<i class="far fa-file-pdf fa-lg"></i> <span>Generate Authorization</span>
 					</a></li>
 
