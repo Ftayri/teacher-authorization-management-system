@@ -98,5 +98,27 @@ public class ProfessorDAO {
 	        session.close();
 	    }
 	}
+	
+	public boolean verifyProfessor(String cin) {
+		Session session = sessionFactory.openSession();
+	    List<Professor> professors = null; // Initialize the list
 
-}
+		try {
+			Query<Professor> query = session.createQuery("FROM Professor WHERE cin = :cinValue", Professor.class);
+	        query.setParameter("cinValue", cin);
+			professors = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	    return professors != null && !professors.isEmpty();
+
+
+	}
+
+		
+		
+	}
+
+

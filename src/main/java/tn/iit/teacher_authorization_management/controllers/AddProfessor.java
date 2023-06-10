@@ -52,8 +52,16 @@ public class AddProfessor extends HttpServlet {
 		professor.setLastName(lastName);
 		professor.setEmail(email);
 		professor.setCin(cin);
+		if(professorDAO.verifyProfessor(cin)==true) {
+			request.setAttribute("error", "Professor already Exists");
+			request.getRequestDispatcher("ProfessorListController").forward(request, response);
+
+		}
+		else {
 		professorDAO.saveProfessor(professor);
-		request.getRequestDispatcher("ProfessorListController").forward(request, response);
+		request.setAttribute("error", "Professor Added Successfully");
+
+		request.getRequestDispatcher("ProfessorListController").forward(request, response);}
 	}
 
 }
