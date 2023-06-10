@@ -1,5 +1,7 @@
 package tn.iit.teacher_authorization_management.dao;
+
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -58,6 +60,20 @@ public class ProfessorDAO {
 		return professors;
 	}
 
+	public List<Professor> getAuthorizedProfessors() {
+		Session session = sessionFactory.openSession();
+		List<Professor> professors = null;
+		try {
+			Query<Professor> query = session.createQuery("FROM Professor p WHERE p.authorized = 0", Professor.class);
+			professors = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return professors;
+	}
+
 	public void updateProfessor(Professor professor) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
@@ -76,27 +92,27 @@ public class ProfessorDAO {
 	}
 
 	public void deleteProfessor(Long professorId) {
-	    Session session = sessionFactory.openSession();
-	    Transaction transaction = null;
-	    try {
-	        transaction = session.beginTransaction();
-	        
-	        // Retrieve the professor object by ID
-	        Professor professor = session.get(Professor.class, professorId);
-	        
-	        // Delete the professor if found
-	        if (professor != null) {
-	            session.delete(professor);
-	            transaction.commit();
-	        }
-	    } catch (Exception e) {
-	        if (transaction != null) {
-	            transaction.rollback();
-	        }
-	        e.printStackTrace();
-	    } finally {
-	        session.close();
-	    }
+		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+
+			// Retrieve the professor object by ID
+			Professor professor = session.get(Professor.class, professorId);
+
+			// Delete the professor if found
+			if (professor != null) {
+				session.delete(professor);
+				transaction.commit();
+			}
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 
 }
