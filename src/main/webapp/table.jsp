@@ -336,8 +336,20 @@
 					<!-- Begin Page Content -->
 					<div class="container-fluid">
 
+
+
 						<!-- Page Heading -->
 						<h1 class="h3 mb-2 text-gray-800">Professors List</h1>
+						<div class="text-left mb-3">
+							<a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
+								data-target="#myModal" id="addButton">
+								<span class="icon text-white-30">
+									<i class="fas fa-user-plus"></i>
+								</span>
+								<span class="text">Add Professor</span>
+							</a>
+						</div>
+
 						<!-- DataTales Example -->
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
@@ -453,7 +465,7 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Edit Professor</h4>
+						<h4 id="modalTitle" class="modal-title">Edit Professor</h4>
 						<button type="button" class="close" data-dismiss="modal" id="closeModal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -520,6 +532,10 @@
 
 
 
+
+
+
+
 		<script>
 			document.addEventListener("DOMContentLoaded", function () {
 				var editButtons = document.querySelectorAll(".editButton");
@@ -547,7 +563,9 @@
 						editModal.querySelector("#cin").value = professorCin;
 						editModal.querySelector("#email").value = professorEmail;
 						editModal.querySelector("#idEdit").value = professorId;
+						editModal.querySelector("#modalTitle").innerText = "Edit" + " " + professorFirstName + " " + professorLastName + "'s Information";
 
+						editModal.querySelector("form").action = "UpdateProfessor";
 						editModal.style.display = "block";
 
 						//close the modal
@@ -578,11 +596,38 @@
 						closeModalDelete.addEventListener("click", function () {
 							deleteModal.style.display = "none";
 						});
+						var noButton = document.querySelector("#myModalDelete .modal-footer .btn-secondary");
+						noButton.addEventListener("click", function () {
+							deleteModal.style.display = "none";
+						});
+
+
 					});
 				});
 
 			});
 
+		</script>
+		<script>
+			var addButton = document.querySelector("#addButton");
+			addButton.addEventListener("click", function () {
+
+				var editModal = document.querySelector("#myModal");
+				editModal.querySelector("#name").value = "";
+				editModal.querySelector("#lastName").value = "";
+				editModal.querySelector("#cin").value = "";
+				editModal.querySelector("#email").value = "";
+				editModal.querySelector("#idEdit").value = "";
+				editModal.querySelector("#modalTitle").innerText = "Add New Professor";
+				editModal.querySelector("form").action = "AddProfessor";
+				editModal.style.display = "block";
+
+				//close the modal
+				var closeModal = document.querySelector("#closeModal");
+				closeModal.addEventListener("click", function () {
+					editModal.style.display = "none";
+				});
+			});
 		</script>
 
 
