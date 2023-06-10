@@ -1,5 +1,6 @@
 package tn.iit.teacher_authorization_management.util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
@@ -16,8 +17,9 @@ import tn.iit.teacher_authorization_management.Admin;
 import tn.iit.teacher_authorization_management.Professor;
 
 public class PDFGenerator {
-	public static void generatePDF(Professor professor, Admin admin) {
+	public static ByteArrayOutputStream generatePDF(Professor professor, Admin admin) {
 		int weeksLeft = 52 - Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		try {
 			PDDocument document = new PDDocument();
 			PDPage page = new PDPage(PDRectangle.A4);
@@ -70,14 +72,14 @@ public class PDFGenerator {
 			contentStream.endText();
 			contentStream.close();
 
-			document.save(
-					"F:\\Cours\\2eme\\JEE\\Teacher Authorization Management System\\src\\main\\resources\\documents\\authorization_"
-							+ professor.getFirstName() + "_" + professor.getLastName() + ".pdf");
+			document.save(outputStream);
 			document.close();
-
 			System.out.println("PDF generated successfully.");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return outputStream;
+
 	}
 }
