@@ -52,7 +52,7 @@ public class AddProfessor extends HttpServlet {
 		professor.setLastName(lastName);
 		professor.setEmail(email);
 		professor.setCin(cin);
-		if(professorDAO.verifyProfessor(cin)==true) {
+		if(professorDAO.verifyProfessor(cin, Long.valueOf(0))==true) {
 			request.setAttribute("error", "Professor already Exists");
 			request.getRequestDispatcher("ProfessorListController").forward(request, response);
 
