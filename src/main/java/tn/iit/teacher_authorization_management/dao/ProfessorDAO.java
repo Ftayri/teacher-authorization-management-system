@@ -115,22 +115,25 @@ public class ProfessorDAO {
 		}
 	}
 	
-	public boolean verifyProfessor(String cin) {
+	public boolean verifyProfessor(String cin, Long id) {
 		Session session = sessionFactory.openSession();
-	    List<Professor> professors = null; // Initialize the list
+	    Professor professor = null; // Initialize the list
 
 		try {
 			Query<Professor> query = session.createQuery("FROM Professor WHERE cin = :cinValue", Professor.class);
 	        query.setParameter("cinValue", cin);
-			professors = query.list();
+			professor = query.uniqueResult();
+			if(professor != null) {
+				if(professor.getId()!=id) {
+					return true;
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-	    return professors != null && !professors.isEmpty();
-
-
+		return false;
 	}
 
 		
