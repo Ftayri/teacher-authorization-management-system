@@ -40,3 +40,6 @@ Deploy the generated WAR file to a Java EE-compliant application server (e.g., A
 Access the application:
 
 Open a web browser and navigate to http://localhost:5050/teacher-authorization-management-system (replace 5050 with the appropriate port if your application server uses a different port).
+
+## Class Diagram:
+!['class_diagram'](class_diagram.png)

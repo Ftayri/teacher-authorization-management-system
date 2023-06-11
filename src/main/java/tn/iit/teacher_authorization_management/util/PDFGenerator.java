@@ -53,7 +53,6 @@ public class PDFGenerator {
 			StringBuilder line = new StringBuilder();
 			for (String word : words) {
 				float width = PDType1Font.TIMES_ROMAN.getStringWidth(line.toString() + " " + word) / 1000 * 12;
-				System.out.println(width);
 				if (width > maxWidth) {
 					contentStream.showText(line.toString().trim());
 					contentStream.newLine();
