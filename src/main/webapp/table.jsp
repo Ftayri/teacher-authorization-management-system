@@ -305,6 +305,27 @@
 										</button>
 									</div>
 								</c:when>
+
+
+								<c:when
+									test="${requestScope.error eq 'Authorization reset already performed this year.'}">
+									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+										<strong>${requestScope.error}</strong>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								</c:when>
+
+
+								<c:when test="${requestScope.error eq 'Authorization reset successful.'}">
+									<div class="alert alert-success alert-dismissible fade show" role="alert">
+										<strong>${requestScope.error}</strong>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								</c:when>
 							</c:choose>
 						</c:if>
 
@@ -319,15 +340,28 @@
 
 						<!-- Page Heading -->
 						<h1 class="h3 mb-2 text-gray-800">Professors List</h1>
-						<div class="text-left mb-3">
-							<a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
-								data-target="#myModal" id="addButton">
-								<span class="icon text-white-30">
-									<i class="fas fa-user-plus"></i>
-								</span>
-								<span class="text">Add Professor</span>
-							</a>
+						<div class="d-flex justify-content-between mb-3">
+							<div class="text-left">
+								<a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
+									data-target="#myModal" id="addButton">
+									<span class="icon text-white-30">
+										<i class="fas fa-user-plus"></i>
+									</span>
+									<span class="text">Add Professor</span>
+								</a>
+							</div>
+
+							<div class="text-right">
+								<a href="ResetAuth" class="btn btn-danger btn-icon-split" data-toggle="modal"
+									data-target="#myModal" id="addButton">
+									<span class="icon text-white-30">
+										<i class="fas fa-undo"></i>
+									</span>
+									<span class="text">Reset Authorization</span>
+								</a>
+							</div>
 						</div>
+
 
 						<!-- DataTales Example -->
 						<div class="card shadow mb-4">

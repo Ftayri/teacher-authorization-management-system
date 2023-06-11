@@ -28,6 +28,9 @@ public class UpdateProfessor extends HttpServlet {
 		professorDAO = new ProfessorDAO(HibernateUtil.getSessionFactory());
 
 	}
+	
+	
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

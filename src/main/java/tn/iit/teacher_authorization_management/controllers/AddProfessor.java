@@ -63,5 +63,7 @@ public class AddProfessor extends HttpServlet {
 
 		request.getRequestDispatcher("ProfessorListController").forward(request, response);}
 	}
+	
+	
 
 }
