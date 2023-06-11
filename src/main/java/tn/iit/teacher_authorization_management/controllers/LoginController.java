@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
 						Admin admin = adminDAO.getAdminByRememberToken(cookie.getValue());
 						if (admin != null) {
 							request.getSession().setAttribute("admin", admin);
-							response.sendRedirect("table.jsp");
+							response.sendRedirect("ProfessorListController");
 							return;
 						}
 					}
@@ -63,17 +63,13 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// get the username and password from the request
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String remember = request.getParameter("rememberToken");
-		// get the admin from the database
 		Admin admin = adminDAO.getAdminByUsernameAndPassword(username, password);
 		if (admin != null) {
-			// if the admin exists, set the session attribute to the admin
 			request.getSession().setAttribute("admin", admin);
 			String token = null;
-			// if the remember me is checked, set the cookie
 			if (remember != null) {
 				token = UUID.randomUUID().toString();
 				Cookie cookie = new Cookie("remember_token", token);
@@ -86,12 +82,9 @@ public class LoginController extends HttpServlet {
 			}
 			admin.setRememberToken(token);
 			adminDAO.saveOrUpdateAdmin(admin);
-			// redirect to the home page
 			response.sendRedirect("ProfessorListController");
 		} else {
-			// set the error message
 			request.setAttribute("error", "Invalid username or password");
-			// redirect to the login page
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
 		}

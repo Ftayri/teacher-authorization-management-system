@@ -44,7 +44,7 @@
 
 	<!-- Divider -->
 	<hr class="sidebar-divider d-none d-md-block">
-	<li class="nav-item"><a class="nav-link" href="#"
+	<li class="nav-item"><a class="nav-link" href="LogoutController"
 		data-toggle="modal" data-target="#logoutModal"> <i
 			class="fas fa-fw fa-sign-out-alt"></i> <span>Logout</span>
 	</a></li>

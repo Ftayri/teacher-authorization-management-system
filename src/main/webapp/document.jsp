@@ -6,7 +6,6 @@
    <jsp:param name="pageTitle" value="${pageTitle}" />
 </jsp:include>
 <body id="page-top">
-
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
@@ -98,7 +97,6 @@
 		<!-- End of Content Wrapper -->
 
 	</div>
-	
 </body>
 
 </html>
