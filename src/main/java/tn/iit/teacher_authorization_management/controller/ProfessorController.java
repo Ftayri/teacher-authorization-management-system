@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import tn.iit.teacher_authorization_management.Professor;
 import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
+import tn.iit.teacher_authorization_management.entity.Professor;
 import tn.iit.teacher_authorization_management.util.HibernateUtil;
 
 /**

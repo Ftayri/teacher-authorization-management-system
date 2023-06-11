@@ -1,4 +1,4 @@
-package tn.iit.teacher_authorization_management;
+package tn.iit.teacher_authorization_management.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

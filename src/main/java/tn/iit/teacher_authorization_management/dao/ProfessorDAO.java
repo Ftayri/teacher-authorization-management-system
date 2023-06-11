@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import tn.iit.teacher_authorization_management.Professor;
+import tn.iit.teacher_authorization_management.entity.Professor;
 
 public class ProfessorDAO {
 	private SessionFactory sessionFactory;

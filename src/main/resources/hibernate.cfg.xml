@@ -9,8 +9,8 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/teacher-auth-management</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
-        <mapping class="tn.iit.teacher_authorization_management.Admin"/>
-        <mapping class="tn.iit.teacher_authorization_management.Professor"/>
+        <mapping class="tn.iit.teacher_authorization_management.entity.Admin"/>
+        <mapping class="tn.iit.teacher_authorization_management.entity.Professor"/>
         
     </session-factory>
 </hibernate-configuration>

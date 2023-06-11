@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import tn.iit.teacher_authorization_management.Admin;
-import tn.iit.teacher_authorization_management.Professor;
 import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
+import tn.iit.teacher_authorization_management.entity.Admin;
+import tn.iit.teacher_authorization_management.entity.Professor;
 import tn.iit.teacher_authorization_management.util.HibernateUtil;
 import tn.iit.teacher_authorization_management.util.PDFGenerator;
 

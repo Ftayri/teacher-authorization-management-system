@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tn.iit.teacher_authorization_management.Professor;
 import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
+import tn.iit.teacher_authorization_management.entity.Professor;
 import tn.iit.teacher_authorization_management.util.HibernateUtil;
 
 /**

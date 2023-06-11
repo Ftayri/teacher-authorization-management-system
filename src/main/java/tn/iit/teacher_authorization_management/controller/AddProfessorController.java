@@ -8,23 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
+import tn.iit.teacher_authorization_management.entity.Professor;
 import tn.iit.teacher_authorization_management.util.HibernateUtil;
 
 /**
- * Servlet implementation class ResetAuth
+ * Servlet implementation class AddProfessor
  */
-@WebServlet("/ResetAuth")
-public class ResetAuth extends HttpServlet {
+@WebServlet("/AddProfessor")
+public class AddProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProfessorDAO professorDAO;
-
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ResetAuth() {
+    public AddProfessorController() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
 	public void init() {
@@ -36,29 +35,35 @@ public class ResetAuth extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if (professorDAO.resetAuthorization()==true) {
-			request.setAttribute("success","Authorization reset successful.");
-			request.getRequestDispatcher("ProfessorListController").forward(request, response);
-		}
-		else {
-			
-			request.setAttribute("error","Authorization reset already performed this year.");
-			request.getRequestDispatcher("ProfessorListController").forward(request, response);
-			
-		}
-		
-		
-		
-		
-		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		String cin = request.getParameter("cin");
+		Professor professor=new Professor();
+		professor.setFirstName(firstName);
+		professor.setLastName(lastName);
+		professor.setEmail(email);
+		professor.setCin(cin);
+		if(professorDAO.verifyProfessor(cin, Long.valueOf(0))==true) {
+			request.setAttribute("error", "Professor already Exists");
+			request.getRequestDispatcher("ProfessorListController").forward(request, response);
+
+		}
+		else {
+		professorDAO.saveProfessor(professor);
+		request.setAttribute("success", "Professor Added Successfully");
+
+		request.getRequestDispatcher("ProfessorListController").forward(request, response);}
 	}
+	
+	
 
 }

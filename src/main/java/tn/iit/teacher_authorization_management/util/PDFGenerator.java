@@ -13,8 +13,8 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-import tn.iit.teacher_authorization_management.Admin;
-import tn.iit.teacher_authorization_management.Professor;
+import tn.iit.teacher_authorization_management.entity.Admin;
+import tn.iit.teacher_authorization_management.entity.Professor;
 
 public class PDFGenerator {
 	public static ByteArrayOutputStream generatePDF(Professor professor, Admin admin) {

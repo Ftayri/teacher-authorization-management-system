@@ -1,8 +1,8 @@
 package tn.iit.teacher_authorization_management.util;
 
-import tn.iit.teacher_authorization_management.Admin;
-import tn.iit.teacher_authorization_management.Professor;
 import tn.iit.teacher_authorization_management.dao.ProfessorDAO;
+import tn.iit.teacher_authorization_management.entity.Admin;
+import tn.iit.teacher_authorization_management.entity.Professor;
 
 public class Test {
 

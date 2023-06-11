@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tn.iit.teacher_authorization_management.Admin;
 import tn.iit.teacher_authorization_management.dao.AdminDAO;
+import tn.iit.teacher_authorization_management.entity.Admin;
 import tn.iit.teacher_authorization_management.util.HibernateUtil;
 
 /**

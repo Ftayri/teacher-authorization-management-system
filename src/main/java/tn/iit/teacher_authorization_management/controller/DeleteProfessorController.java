@@ -14,11 +14,11 @@ import tn.iit.teacher_authorization_management.util.HibernateUtil;
  * Servlet implementation class DeleteProfessor
  */
 @WebServlet("/DeleteProfessor")
-public class DeleteProfessor extends HttpServlet {
+public class DeleteProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProfessorDAO professorDAO;
 
-    public DeleteProfessor() {
+    public DeleteProfessorController() {
         super();
         // TODO Auto-generated constructor stub
     }
