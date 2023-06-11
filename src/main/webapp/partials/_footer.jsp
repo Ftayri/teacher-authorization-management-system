@@ -56,4 +56,4 @@
 			});
 		});
 	</script>
-	<script type="text/javascript" src="<c:url value='/partials/toggle.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/scripts/toggle.js'/>"></script>
