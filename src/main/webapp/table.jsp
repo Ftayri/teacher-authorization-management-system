@@ -31,7 +31,8 @@
 						<c:if test="${not empty requestScope.error}">
 							<c:choose>
 								<c:when test="${requestScope.error eq 'Professor Added Successfully'}">
-									<div class="alert alert-success alert-dismissible fade show" role="alert">
+									<div id="success-alert" class="alert alert-success alert-dismissible fade show"
+										role="alert">
 										<strong>${requestScope.error}</strong>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -39,7 +40,8 @@
 									</div>
 								</c:when>
 								<c:when test="${requestScope.error eq 'Professor already Exists'}">
-									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<div id="exists1" class="alert alert-warning alert-dismissible fade show"
+										role="alert">
 										<strong>${requestScope.error}</strong>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -47,7 +49,8 @@
 									</div>
 								</c:when>
 								<c:when test="${requestScope.error eq 'CIN already Exists'}">
-									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<div id="exists2" class="alert alert-warning alert-dismissible fade show"
+										role="alert">
 										<strong>${requestScope.error}</strong>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -56,7 +59,8 @@
 								</c:when>
 
 								<c:when test="${requestScope.error eq 'Professor Updated Successfully !'}">
-									<div class="alert alert-success alert-dismissible fade show" role="alert">
+									<div id="exists3" class="alert alert-success alert-dismissible fade show"
+										role="alert">
 										<strong>${requestScope.error}</strong>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -67,7 +71,8 @@
 
 								<c:when
 									test="${requestScope.error eq 'Authorization reset already performed this year.'}">
-									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<div id="exists4" class="alert alert-warning alert-dismissible fade show"
+										role="alert">
 										<strong>${requestScope.error}</strong>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -76,7 +81,8 @@
 								</c:when>
 
 								<c:when test="${requestScope.error eq 'Authorization reset successful.'}">
-									<div class="alert alert-success alert-dismissible fade show" role="alert">
+									<div id="exists5" class="alert alert-success alert-dismissible fade show"
+										role="alert">
 										<strong>${requestScope.error}</strong>
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
@@ -335,6 +341,8 @@
 			});
 
 		</script>
+
+
 		<script>
 			var addButton = document.querySelector("#addButton");
 			addButton.addEventListener("click", function () {
