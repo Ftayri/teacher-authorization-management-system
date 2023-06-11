@@ -1,4 +1,4 @@
-package tn.iit.teacher_authorization_management.controllers;
+package tn.iit.teacher_authorization_management.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
