@@ -35,8 +35,8 @@ public class DeleteProfessor extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long professorId = Long.parseLong(request.getParameter("id"));
 	    professorDAO.deleteProfessor(professorId);
+		request.setAttribute("success","Professor Deleted Successfully !");
 		request.getRequestDispatcher("ProfessorListController").forward(request, response);
-	    
 
 	}
 

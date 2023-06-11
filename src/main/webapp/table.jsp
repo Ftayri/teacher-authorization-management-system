@@ -28,69 +28,18 @@
 
 					<!-- Begin Page Content -->
 					<div class="container-fluid">
-						<c:if test="${not empty requestScope.error}">
-							<c:choose>
-								<c:when test="${requestScope.error eq 'Professor Added Successfully'}">
-									<div id="success-alert" class="alert alert-success alert-dismissible fade show"
-										role="alert">
-										<strong>${requestScope.error}</strong>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-								</c:when>
-								<c:when test="${requestScope.error eq 'Professor already Exists'}">
-									<div id="exists1" class="alert alert-warning alert-dismissible fade show"
-										role="alert">
-										<strong>${requestScope.error}</strong>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-								</c:when>
-								<c:when test="${requestScope.error eq 'CIN already Exists'}">
-									<div id="exists2" class="alert alert-warning alert-dismissible fade show"
-										role="alert">
-										<strong>${requestScope.error}</strong>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-								</c:when>
-
-								<c:when test="${requestScope.error eq 'Professor Updated Successfully !'}">
-									<div id="exists3" class="alert alert-success alert-dismissible fade show"
-										role="alert">
-										<strong>${requestScope.error}</strong>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-								</c:when>
-
-
-								<c:when
-									test="${requestScope.error eq 'Authorization reset already performed this year.'}">
-									<div id="exists4" class="alert alert-warning alert-dismissible fade show"
-										role="alert">
-										<strong>${requestScope.error}</strong>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-								</c:when>
-
-								<c:when test="${requestScope.error eq 'Authorization reset successful.'}">
-									<div id="exists5" class="alert alert-success alert-dismissible fade show"
-										role="alert">
-										<strong>${requestScope.error}</strong>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-								</c:when>
-							</c:choose>
+						<c:if test="${not empty requestScope.success}">
+							<div id="success-alert" class="alert alert-success fade show"
+								role="alert">
+								<strong>${requestScope.success}</strong>
+							</div>
 						</c:if>
+						<c:if test="${not empty requestScope.error}">
+							<div id="error-alert" class="alert alert-danger fade show" role="alert">
+								<strong>${requestScope.error}</strong>
+							</div>
+						</c:if>
+
 
 						<!-- Page Heading -->
 						<h1 class="h3 mb-2 text-gray-800">Professors List</h1>

@@ -59,7 +59,7 @@ public class AddProfessor extends HttpServlet {
 		}
 		else {
 		professorDAO.saveProfessor(professor);
-		request.setAttribute("error", "Professor Added Successfully");
+		request.setAttribute("success", "Professor Added Successfully");
 
 		request.getRequestDispatcher("ProfessorListController").forward(request, response);}
 	}

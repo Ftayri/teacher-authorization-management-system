@@ -38,7 +38,7 @@ public class ResetAuth extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if (professorDAO.resetAuthorization()==true) {
-			request.setAttribute("error","Authorization reset successful.");
+			request.setAttribute("success","Authorization reset successful.");
 			request.getRequestDispatcher("ProfessorListController").forward(request, response);
 		}
 		else {

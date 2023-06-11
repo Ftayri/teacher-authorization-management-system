@@ -59,30 +59,13 @@
 		// Wait for 2 seconds and then remove the success alert
 		setTimeout(function () {
 			var successAlert = document.getElementById('success-alert');
-			var exists1 = document.getElementById('exists1');
-			var exists2 = document.getElementById('exists2');
-			var exists3 = document.getElementById('exists3');
-			var exists4 = document.getElementById('exists4');
-			var exists5 = document.getElementById('exists5');
+			var errorAlert = document.getElementById('error-alert');
 			if (successAlert) {
 				successAlert.remove();
 			}
-			if (exists1) {
-				exists1.remove();
+			if (errorAlert) {
+				errorAlert.remove();
 			}
-			if (exists2) {
-				exists2.remove();
-			}
-			if (exists3) {
-				exists3.remove();
-			}
-			if (exists4) {
-				exists4.remove();
-			}
-			if (exists5) {
-				exists5.remove();
-			}
-
 		}, 2000);
 	</script>
 	<script type="text/javascript" src="<c:url value='/scripts/toggle.js'/>"></script>

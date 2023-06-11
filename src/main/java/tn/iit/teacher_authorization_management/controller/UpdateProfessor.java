@@ -60,7 +60,7 @@ public class UpdateProfessor extends HttpServlet {
 			professor.setEmail(email);
 			professor.setCin(cin);
 			professorDAO.updateProfessor(professor);
-			request.setAttribute("error","Professor Updated Successfully !");
+			request.setAttribute("success","Professor Updated Successfully !");
 			request.getRequestDispatcher("ProfessorListController").forward(request, response);
 		}
 		else {
